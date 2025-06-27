@@ -26,3 +26,8 @@ export function createCard(item, delCard, openPopup, likeCard) {
 
   return cardItem;
 }
+
+// @todo: Функция удаления карточки
+export function deleteCard(cardItem) {
+  cardItem.remove();
+};
