@@ -1,3 +1,5 @@
+import { toggleLike } from './api.js'
+
 // @todo: Темплейт карточки
 const cardTemplate = document.querySelector("#card-template").content;
 
@@ -7,6 +9,7 @@ export function createCard(item, delCard, openPopup, likeCard, userId) {
   const deleteButton = cardItem.querySelector(".card__delete-button");
   const cardImage = cardItem.querySelector(".card__image");
   const cardLikeButton = cardItem.querySelector(".card__like-button");
+  const cardLikeСounter = cardItem.querySelector('.like__counter')
 
   cardImage.src = item.link;
   cardImage.alt = item.name;
@@ -34,8 +37,23 @@ export function createCard(item, delCard, openPopup, likeCard, userId) {
   });
 
   cardLikeButton.addEventListener("click", function (evt) {
-    likeCard(item._id, cardItem, cardLikeButton);
+    likeCard(item._id, cardLikeButton, cardLikeСounter);
   });
 
   return cardItem;
+}
+
+export function addLikeCard(cardId, cardLikeButton, cardLikeСounter) {
+  const isLiked = cardLikeButton.classList.contains(
+    "card__like-button_is-active"
+  );
+
+  toggleLike(cardId, isLiked)
+    .then((data) => {
+      cardLikeСounter.textContent = data.likes.length;
+      cardLikeButton.classList.toggle("card__like-button_is-active");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }

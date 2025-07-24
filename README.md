@@ -1,2 +1,2 @@
-# Проектная работа Mesto https://github.com/serya1984/mesto-project-ff
+# Проектная работа Mesto https://serya1984.github.io/mesto-project-ff/
 

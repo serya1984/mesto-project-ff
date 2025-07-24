@@ -7,13 +7,10 @@ const config = {
 };
 
 function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
+  if (!res.ok) {
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
-  return res.json().then((error) => {
-    error.httpResponseCode = res.status;
-    return Promise.reject(error);
-  });
+  return res.json();
 }
 
 export const loadCards = () => {
